@@ -7,7 +7,7 @@ import "./CheckoutPage.css";
 
 export function CheckoutPage({ cart }) {
   const [deliveryOptions, setDeliveryOptions] = useState([]);
-  const [paymentSummary, setPayementSummary] = useState(null);
+  const [paymentSummary, setPaymentSummary] = useState(null);
 
   useEffect(() => {
     axios
@@ -16,8 +16,8 @@ export function CheckoutPage({ cart }) {
         setDeliveryOptions(response.data);
       });
 
-    axios.get("/api/payement-summary").then((response) => {
-      setPayementSummary(response.data);
+    axios.get("/api/payment-summary").then((response) => {
+      setPaymentSummary(response.data);
     });
   }, []);
 
