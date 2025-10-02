@@ -1,16 +1,17 @@
 import axios from "axios";
 import dayjs from "dayjs";
 import { useEffect, useState, Fragment } from "react";
-import { Header } from "../components/Header";
-import { formatMoney } from "../utils/money";
+import { Header } from "../../components/Header";
+import { formatMoney } from "../../utils/money";
 import "./OrdersPage.css";
 
 export function OrdersPage({ cart }) {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    axios.get("/api/orders").then((response) => {
-      setOrders(response.data);
+    axios.get('/api/orders?expand=products')
+      .then((response) => {
+        setOrders(response.data);
     });
   }, []);
 
@@ -27,6 +28,7 @@ export function OrdersPage({ cart }) {
           {orders.map((order) => {
             return (
               <div key={order.id} className="order-container">
+
                 <div className="order-header">
                   <div className="order-header-left-section">
                     <div className="order-date">
@@ -46,7 +48,7 @@ export function OrdersPage({ cart }) {
                 </div>
 
                 <div className="order-details-grid">
-                  {order.products.maps((orderProduct) => {
+                  {order.products.map((orderProduct) => {
                     return (
                       <Fragment key={orderProduct.product.id}>
                         <div className="product-image-container">
@@ -58,7 +60,7 @@ export function OrdersPage({ cart }) {
                             {orderProduct.product.name}
                           </div>
                           <div className="product-delivery-date">
-                            Arriving on: {dayjs(orderProduct.estimatedDeliveryTimesMs.format('MMMM D'))}
+                            Arriving on: {dayjs(orderProduct.estimatedDeliveryTimeMs).format('MMMM D')}
                           </div>
                           <div className="product-quantity">
                             Quantity: {orderProduct.quantity}
