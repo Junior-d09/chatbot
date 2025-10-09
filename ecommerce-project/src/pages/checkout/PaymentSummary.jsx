@@ -11,6 +11,8 @@ export function PaymentSummary({ paymentSummary, loadCart }) {
     navigate('/orders');
   };
 
+  console.log("PAYMENT SUMMARY:", paymentSummary);
+
   return (
     <div className="payment-summary">
       <div className="payment-summary-title">Payment Summary</div>
@@ -34,7 +36,7 @@ export function PaymentSummary({ paymentSummary, loadCart }) {
           <div className="payment-summary-row subtotal-row">
             <div>Total before tax:</div>
             <div className="payment-summary-money">
-              {formatMoney(paymentSummary.totalBeforeTaxCents)}
+              {formatMoney(paymentSummary.totalCostBeforeTaxCents)}
             </div>
           </div>
 
